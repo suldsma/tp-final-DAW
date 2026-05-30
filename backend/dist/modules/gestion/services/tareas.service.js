@@ -27,18 +27,34 @@ let TareasService = class TareasService {
     async crearTarea(dto) {
         const proyecto = await this.proyectoRepo.findOne({ where: { id: dto.idProyecto } });
         if (!proyecto) {
-            throw new common_1.NotFoundException(`El proyecto no existe.`);
+            throw new common_1.NotFoundException(`El proyecto con ID ${dto.idProyecto} no existe.`);
         }
         const nuevaTarea = this.tareaRepo.create({
             descripcion: dto.descripcion,
             estado: estados_tareas_enum_1.EstadosTareasEnum.PENDIENTE,
             proyecto: proyecto
         });
-        const guardado = await this.tareaRepo.save(nuevaTarea);
-        return { id: guardado.id };
+        const result = await this.tareaRepo.save(nuevaTarea);
+        return { id: result.id };
+    }
+    async actualizarEstado(id, estado) {
+        const tarea = await this.tareaRepo.findOne({ where: { id } });
+        if (!tarea) {
+            throw new common_1.NotFoundException(`Tarea con ID ${id} no encontrada.`);
+        }
+        tarea.estado = estado;
+        return await this.tareaRepo.save(tarea);
+    }
+    async obtenerTareas(idProyecto) {
+        const query = this.tareaRepo.createQueryBuilder('tarea')
+            .leftJoinAndSelect('tarea.proyecto', 'proyecto');
+        if (idProyecto) {
+            query.where('tarea.proyecto = :idProyecto', { idProyecto });
+        }
+        return await query.orderBy('tarea.id', 'ASC').getMany();
     }
     async actualizarTarea(id, dto) {
-        const tarea = await this.tareaRepo.findOne({ where: { id } });
+        const tarea = await this.tareaRepo.findOne({ where: { id }, relations: ['proyecto'] });
         if (!tarea)
             throw new common_1.NotFoundException(`Tarea no encontrada.`);
         if (dto.descripcion)
@@ -56,15 +72,8 @@ let TareasService = class TareasService {
     async eliminarTarea(id) {
         const tarea = await this.tareaRepo.findOne({ where: { id } });
         if (!tarea)
-            throw new common_1.NotFoundException(`Tarea no encontrada.`);
+            throw new common_1.NotFoundException(`Tarea con ID ${id} no encontrada.`);
         await this.tareaRepo.remove(tarea);
-    }
-    async obtenerTareas(idProyecto) {
-        const query = this.tareaRepo.createQueryBuilder('tarea')
-            .leftJoinAndSelect('tarea.proyecto', 'proyecto');
-        if (idProyecto)
-            query.where('proyecto.id = :idProyecto', { idProyecto });
-        return await query.orderBy('tarea.id', 'ASC').getMany();
     }
 };
 exports.TareasService = TareasService;

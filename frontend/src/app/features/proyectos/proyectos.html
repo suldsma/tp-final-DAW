@@ -29,7 +29,7 @@
           <th>Tareas Totales</th>
           <th>Fecha Fin</th>
           <th>Estado</th>
-          <th>Acciones</th>
+          <th>Plazo</th> <th>Acciones</th>
         </tr>
       </thead>
       <tbody>
@@ -55,6 +55,29 @@
               {{ proyecto.estado }}
             </span>
           </td>
+          
+          <td>
+            <span *ngIf="proyecto.estado === 'FINALIZADO'" class="badge-plazo plazo-completado">
+              ✓ Terminado
+            </span>
+
+            <span *ngIf="proyecto.estado === 'BAJA'" class="badge-plazo plazo-completado">
+              -
+            </span>
+
+            <ng-container *ngIf="proyecto.estado === 'ACTIVO'">
+              <span *ngIf="!proyecto.fechaFinalizacion" class="muted-text">-</span>
+              
+              <span *ngIf="proyecto.fechaFinalizacion" class="badge-plazo" [ngClass]="{
+                'plazo-retrasado': obtenerDiasRestantes(proyecto.fechaFinalizacion) < 0,
+                'plazo-urgente': obtenerDiasRestantes(proyecto.fechaFinalizacion) >= 0 && obtenerDiasRestantes(proyecto.fechaFinalizacion) <= 3,
+                'plazo-a-tiempo': obtenerDiasRestantes(proyecto.fechaFinalizacion) > 3
+              }">
+                {{ textoPlazo(proyecto.fechaFinalizacion) }}
+              </span>
+            </ng-container>
+          </td>
+
           <td>
             <div class="acciones-cell">
               <button 
@@ -79,7 +102,7 @@
           </td>
         </tr>
         <tr *ngIf="listaProyectos.length === 0">
-          <td colspan="7" class="text-center muted-text padding-30">No se encontraron proyectos registrados.</td>
+          <td colspan="8" class="text-center muted-text padding-30">No se encontraron proyectos registrados.</td>
         </tr>
       </tbody>
     </table>
@@ -94,6 +117,11 @@
     <div class="form-group">
       <label>Nombre del Proyecto *</label>
       <input type="text" [(ngModel)]="nuevoProyecto.nombre" placeholder="Ej: Rediseño E-commerce" class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label>Fecha Objetivo de Finalización *</label>
+      <input type="date" [(ngModel)]="nuevoProyecto.fechaFinalizacion" class="form-control">
     </div>
 
     <div class="form-group">

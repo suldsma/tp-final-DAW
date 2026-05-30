@@ -5,6 +5,7 @@ export declare class ProyectoEntity {
     id: number;
     nombre: string;
     estado: EstadosProyectosEnum;
-    cliente: ClienteEntity;
+    fechaFinalizacion: Date | null;
+    cliente: ClienteEntity | null;
     tareas: TareaEntity[];
 }

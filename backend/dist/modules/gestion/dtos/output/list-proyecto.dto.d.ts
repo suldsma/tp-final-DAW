@@ -4,5 +4,5 @@ export declare class ListProyectoDTO {
     id: number;
     nombre: string;
     estado: EstadosProyectosEnum;
-    cliente: ListClienteDTO | null;
+    cliente: ListClienteDTO;
 }

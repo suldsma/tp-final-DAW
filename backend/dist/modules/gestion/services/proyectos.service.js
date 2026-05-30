@@ -48,6 +48,7 @@ let ProyectosService = class ProyectosService {
         return { id: guardado.id };
     }
     async actualizarProyecto(id, dto) {
+        console.log('DTO recibido:', dto);
         const proyecto = await this.proyectoRepo.findOne({ where: { id } });
         if (!proyecto) {
             throw new common_1.NotFoundException(`Proyecto con ID ${id} no encontrado.`);
@@ -74,6 +75,9 @@ let ProyectosService = class ProyectosService {
                 }
                 proyecto.cliente = cliente;
             }
+        }
+        if (dto.fechaFinalizacion !== undefined) {
+            proyecto.fechaFinalizacion = dto.fechaFinalizacion ? new Date(dto.fechaFinalizacion) : null;
         }
         await this.proyectoRepo.save(proyecto);
     }

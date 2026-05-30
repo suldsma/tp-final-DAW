@@ -29,8 +29,8 @@ exports.AuthController = AuthController;
 __decorate([
     (0, common_1.HttpCode)(common_1.HttpStatus.OK),
     (0, common_1.Post)('login'),
-    (0, swagger_1.ApiOkResponse)({ description: 'Login exitoso. Devuelve el token JWT.' }),
-    (0, swagger_1.ApiUnauthorizedResponse)({ description: 'Credenciales inválidas o usuario inactivo.' }),
+    (0, swagger_1.ApiOkResponse)({ description: 'Login exitoso.' }),
+    (0, swagger_1.ApiUnauthorizedResponse)({ description: 'Credenciales inválidas.' }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [login_dto_1.LoginDto]),

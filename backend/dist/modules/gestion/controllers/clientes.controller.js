@@ -36,6 +36,8 @@ let ClientesController = class ClientesController {
         return clientes.map(cliente => ({
             id: cliente.id,
             nombre: cliente.nombre,
+            correo: cliente.correo,
+            telefono: cliente.telefono,
             estado: cliente.estado
         }));
     }

@@ -30,7 +30,7 @@ exports.GestionModule = GestionModule = __decorate([
         ],
         controllers: [clientes_controller_1.ClientesController, proyectos_controller_1.ProyectosController, tareas_controller_1.TareasController],
         providers: [clientes_service_1.ClientesService, proyectos_service_1.ProyectosService, tareas_service_1.TareasService],
-        exports: [],
+        exports: [tareas_service_1.TareasService, proyectos_service_1.ProyectosService, clientes_service_1.ClientesService],
     })
 ], GestionModule);
 //# sourceMappingURL=gestion.module.js.map

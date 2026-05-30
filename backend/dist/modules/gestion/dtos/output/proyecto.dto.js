@@ -12,14 +12,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProyectoDTO = void 0;
 const swagger_1 = require("@nestjs/swagger");
 const estados_proyectos_enum_1 = require("../../enums/estados-proyectos.enum");
-const list_tarea_dto_1 = require("./list-tarea.dto");
 class ProyectoDTO {
 }
 exports.ProyectoDTO = ProyectoDTO;
-__decorate([
-    (0, swagger_1.ApiProperty)(),
-    __metadata("design:type", Number)
-], ProyectoDTO.prototype, "id", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)(),
     __metadata("design:type", String)
@@ -29,11 +24,11 @@ __decorate([
     __metadata("design:type", String)
 ], ProyectoDTO.prototype, "estado", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ nullable: true }),
-    __metadata("design:type", Object)
+    (0, swagger_1.ApiProperty)(),
+    __metadata("design:type", String)
 ], ProyectoDTO.prototype, "cliente", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ type: [list_tarea_dto_1.ListTareaDTO] }),
+    (0, swagger_1.ApiProperty)(),
     __metadata("design:type", Array)
 ], ProyectoDTO.prototype, "tareas", void 0);
 //# sourceMappingURL=proyecto.dto.js.map

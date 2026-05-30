@@ -96,6 +96,37 @@
   &-baja { background-color: rgba(220, 53, 69, 0.15); color: var(--state-inactive); }
 }
 
+// --- NUEVOS ESTILOS PARA LAS ALERTAS DE PLAZOS ---
+.badge-plazo {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.plazo-a-tiempo {
+  background-color: rgba(40, 167, 69, 0.15); 
+  color: #28a745;
+}
+
+.plazo-urgente {
+  background-color: rgba(255, 193, 7, 0.15); 
+  color: #ffc107;
+}
+
+.plazo-retrasado {
+  background-color: rgba(220, 53, 69, 0.15); 
+  color: #dc3545;
+  border: 1px solid rgba(220, 53, 69, 0.3);
+}
+
+.plazo-completado {
+  background-color: rgba(255, 255, 255, 0.05); 
+  color: var(--text-muted);
+}
+// -------------------------------------------------
+
 .acciones-cell {
   display: flex;
   gap: 6px;

@@ -34,4 +34,10 @@ __decorate([
     (0, class_validator_1.IsEnum)(estados_proyectos_enum_1.EstadosProyectosEnum),
     __metadata("design:type", String)
 ], UpdateProyectoDto.prototype, "estado", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Fecha límite del proyecto. Formato: YYYY-MM-DD' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsDateString)(),
+    __metadata("design:type", String)
+], UpdateProyectoDto.prototype, "fechaFinalizacion", void 0);
 //# sourceMappingURL=update-proyecto.dto.js.map

@@ -29,7 +29,7 @@ __decorate([
     __metadata("design:type", String)
 ], ListProyectoDTO.prototype, "estado", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ nullable: true }),
+    (0, swagger_1.ApiProperty)(),
     __metadata("design:type", list_cliente_dto_1.ListClienteDTO)
 ], ListProyectoDTO.prototype, "cliente", void 0);
 //# sourceMappingURL=list-proyecto.dto.js.map

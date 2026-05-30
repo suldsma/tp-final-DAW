@@ -11,9 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.EstadisticasController = void 0;
 const common_1 = require("@nestjs/common");
-const swagger_1 = require("@nestjs/swagger");
 const estadisticas_service_1 = require("../services/estadisticas.service");
-const auth_guard_1 = require("../../auth/guards/auth.guard");
 let EstadisticasController = class EstadisticasController {
     constructor(estadisticasService) {
         this.estadisticasService = estadisticasService;
@@ -24,16 +22,12 @@ let EstadisticasController = class EstadisticasController {
 };
 exports.EstadisticasController = EstadisticasController;
 __decorate([
-    (0, swagger_1.ApiBearerAuth)(),
-    (0, swagger_1.ApiOkResponse)({ description: 'Estadísticas del sistema' }),
     (0, common_1.Get)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], EstadisticasController.prototype, "obtenerEstadisticas", null);
 exports.EstadisticasController = EstadisticasController = __decorate([
-    (0, swagger_1.ApiTags)('Estadísticas'),
-    (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
     (0, common_1.Controller)('estadisticas'),
     __metadata("design:paramtypes", [estadisticas_service_1.EstadisticasService])
 ], EstadisticasController);

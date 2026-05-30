@@ -20,7 +20,6 @@ const swagger_1 = require("@nestjs/swagger");
 const list_proyecto_dto_1 = require("../dtos/output/list-proyecto.dto");
 const estados_proyectos_enum_1 = require("../enums/estados-proyectos.enum");
 const proyectos_service_1 = require("../services/proyectos.service");
-const auth_guard_1 = require("../../auth/guards/auth.guard");
 let ProyectosController = class ProyectosController {
     constructor(proyectosService) {
         this.proyectosService = proyectosService;
@@ -37,6 +36,7 @@ let ProyectosController = class ProyectosController {
             id: p.id,
             nombre: p.nombre,
             estado: p.estado,
+            fechaFinalizacion: p.fechaFinalizacion ?? null,
             cliente: p.cliente ? { id: p.cliente.id, nombre: p.cliente.nombre } : null
         }));
     }
@@ -70,7 +70,6 @@ __decorate([
 ], ProyectosController.prototype, "obtenerProyectos", null);
 exports.ProyectosController = ProyectosController = __decorate([
     (0, swagger_1.ApiTags)('Proyectos'),
-    (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
     (0, common_1.Controller)('proyectos'),
     __metadata("design:paramtypes", [proyectos_service_1.ProyectosService])
 ], ProyectosController);

@@ -30,8 +30,12 @@ __decorate([
     __metadata("design:type", String)
 ], ProyectoEntity.prototype, "estado", void 0);
 __decorate([
+    (0, typeorm_1.Column)({ type: 'date', nullable: true, name: 'fechaFinalizacionObjetivo' }),
+    __metadata("design:type", Date)
+], ProyectoEntity.prototype, "fechaFinalizacion", void 0);
+__decorate([
     (0, typeorm_1.ManyToOne)(() => cliente_entity_1.ClienteEntity, (cliente) => cliente.proyectos, { nullable: true }),
-    (0, typeorm_1.JoinColumn)({ name: 'id_cliente' }),
+    (0, typeorm_1.JoinColumn)({ name: 'id_cliente', referencedColumnName: 'id' }),
     __metadata("design:type", cliente_entity_1.ClienteEntity)
 ], ProyectoEntity.prototype, "cliente", void 0);
 __decorate([

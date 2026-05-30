@@ -21,17 +21,19 @@ let AuthGuard = class AuthGuard {
     async canActivate(context) {
         const request = context.switchToHttp().getRequest();
         const token = this.extractTokenFromHeader(request);
-        if (!token) {
-            throw new common_1.UnauthorizedException('No se proporcionó un token de acceso');
-        }
+        if (!token)
+            throw new common_1.UnauthorizedException('Token no proporcionado');
         try {
-            const payload = await this.jwtService.verifyAsync(token, {
-                secret: this.configService.get('JWT_SECRET', 'super_secreto_daw_2026'),
-            });
+            const secret = this.configService.get('JWT_SECRET');
+            if (!secret)
+                throw new Error('JWT_SECRET no configurado');
+            const payload = await this.jwtService.verifyAsync(token, { secret });
             request['user'] = payload;
         }
-        catch {
-            throw new common_1.UnauthorizedException('Token inválido o expirado');
+        catch (error) {
+            if (error instanceof Error && error.message.includes('secret'))
+                throw error;
+            throw new common_1.UnauthorizedException('Token inválido');
         }
         return true;
     }
@@ -43,6 +45,7 @@ let AuthGuard = class AuthGuard {
 exports.AuthGuard = AuthGuard;
 exports.AuthGuard = AuthGuard = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [jwt_1.JwtService, config_1.ConfigService])
+    __metadata("design:paramtypes", [jwt_1.JwtService,
+        config_1.ConfigService])
 ], AuthGuard);
 //# sourceMappingURL=auth.guard.js.map

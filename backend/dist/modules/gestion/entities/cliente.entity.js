@@ -25,6 +25,14 @@ __decorate([
     __metadata("design:type", String)
 ], ClienteEntity.prototype, "nombre", void 0);
 __decorate([
+    (0, typeorm_1.Column)({ type: 'varchar', length: 150, nullable: true }),
+    __metadata("design:type", String)
+], ClienteEntity.prototype, "correo", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ type: 'varchar', length: 50, nullable: true }),
+    __metadata("design:type", String)
+], ClienteEntity.prototype, "telefono", void 0);
+__decorate([
     (0, typeorm_1.Column)({ type: 'enum', enum: estados_clientes_enum_1.EstadosClientesEnum, default: estados_clientes_enum_1.EstadosClientesEnum.ACTIVO }),
     __metadata("design:type", String)
 ], ClienteEntity.prototype, "estado", void 0);

@@ -21,4 +21,17 @@ __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
 ], CreateClienteDto.prototype, "nombre", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ required: false, example: 'juan@empresa.com' }),
+    (0, class_validator_1.IsEmail)(),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", String)
+], CreateClienteDto.prototype, "correo", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ required: false, example: '+54 11 1234-5678' }),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.MaxLength)(50),
+    __metadata("design:type", String)
+], CreateClienteDto.prototype, "telefono", void 0);
 //# sourceMappingURL=create-cliente.dto.js.map

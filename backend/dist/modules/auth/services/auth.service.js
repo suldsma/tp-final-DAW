@@ -17,6 +17,7 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 const jwt_1 = require("@nestjs/jwt");
+const bcrypt = require("bcrypt");
 const usuario_entity_1 = require("../entities/usuario.entity");
 const estados_usuarios_enum_1 = require("../enums/estados-usuarios.enum");
 let AuthService = class AuthService {
@@ -25,11 +26,18 @@ let AuthService = class AuthService {
         this.jwtService = jwtService;
     }
     async login(dto) {
-        const usuario = await this.usuarioRepo.query(`SELECT * FROM usuarios WHERE nombre = $1 AND clave = crypt($2, clave) AND estado = $3`, [dto.nombre, dto.clave, estados_usuarios_enum_1.EstadosUsuariosEnum.ACTIVO]);
-        if (!usuario || usuario.length === 0) {
+        const usuario = await this.usuarioRepo.findOne({ where: { nombre: dto.nombre } });
+        if (!usuario) {
             throw new common_1.UnauthorizedException('Credenciales inválidas');
         }
-        const payload = { sub: usuario[0].id, nombre: usuario[0].nombre };
+        if (usuario.estado !== estados_usuarios_enum_1.EstadosUsuariosEnum.ACTIVO) {
+            throw new common_1.UnauthorizedException('El usuario no se encuentra activo en el sistema');
+        }
+        const passwordMatch = await bcrypt.compare(dto.clave, usuario.clave);
+        if (!passwordMatch) {
+            throw new common_1.UnauthorizedException('Credenciales inválidas');
+        }
+        const payload = { sub: usuario.id, nombre: usuario.nombre };
         const token = await this.jwtService.signAsync(payload);
         return { token };
     }

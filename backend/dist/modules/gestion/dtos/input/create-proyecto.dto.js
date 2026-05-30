@@ -27,4 +27,10 @@ __decorate([
     (0, class_validator_1.IsInt)(),
     __metadata("design:type", Number)
 ], CreateProyectoDto.prototype, "idCliente", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Fecha límite del proyecto. Formato: YYYY-MM-DD' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsDateString)(),
+    __metadata("design:type", String)
+], CreateProyectoDto.prototype, "fechaFinalizacion", void 0);
 //# sourceMappingURL=create-proyecto.dto.js.map

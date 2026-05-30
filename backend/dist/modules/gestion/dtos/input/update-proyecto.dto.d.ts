@@ -3,4 +3,5 @@ export declare class UpdateProyectoDto {
     nombre?: string;
     idCliente?: number;
     estado?: EstadosProyectosEnum;
+    fechaFinalizacion?: string;
 }

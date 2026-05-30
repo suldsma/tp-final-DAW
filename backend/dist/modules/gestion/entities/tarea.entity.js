@@ -29,7 +29,7 @@ __decorate([
     __metadata("design:type", String)
 ], TareaEntity.prototype, "estado", void 0);
 __decorate([
-    (0, typeorm_1.ManyToOne)(() => proyecto_entity_1.ProyectoEntity, (proyecto) => proyecto.tareas),
+    (0, typeorm_1.ManyToOne)(() => proyecto_entity_1.ProyectoEntity, (proyecto) => proyecto.tareas, { nullable: false }),
     (0, typeorm_1.JoinColumn)({ name: 'id_proyecto' }),
     __metadata("design:type", proyecto_entity_1.ProyectoEntity)
 ], TareaEntity.prototype, "proyecto", void 0);

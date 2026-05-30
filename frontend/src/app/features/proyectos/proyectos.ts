@@ -22,9 +22,11 @@ export class Proyectos implements OnInit {
 
   mostrarModal: boolean = false;
   modalError: string = '';
-  nuevoProyecto: { nombre: string; idCliente: number | null } = {
+  
+  nuevoProyecto: { nombre: string; idCliente: number | null; fechaFinalizacion: string } = {
     nombre: '',
-    idCliente: null
+    idCliente: null,
+    fechaFinalizacion: ''
   };
 
   constructor(private http: HttpClient) {}
@@ -69,7 +71,7 @@ export class Proyectos implements OnInit {
   abrirModalCrear(): void {
     this.mostrarModal = true;
     this.modalError = '';
-    this.nuevoProyecto = { nombre: '', idCliente: null };
+    this.nuevoProyecto = { nombre: '', idCliente: null, fechaFinalizacion: '' };
     this.cargarClientesActivos();
   }
 
@@ -85,8 +87,14 @@ export class Proyectos implements OnInit {
       return;
     }
 
+    if (!this.nuevoProyecto.fechaFinalizacion) {
+      this.modalError = 'La fecha objetivo de finalización es obligatoria.';
+      return;
+    }
+
     const payload: any = {
-      nombre: this.nuevoProyecto.nombre.trim()
+      nombre: this.nuevoProyecto.nombre.trim(),
+      fechaFinalizacion: this.nuevoProyecto.fechaFinalizacion 
     };
 
     if (this.nuevoProyecto.idCliente) {
@@ -136,5 +144,29 @@ export class Proyectos implements OnInit {
         this.errorMensaje = err.error?.message || 'No se pudo actualizar el estado del proyecto.';
       }
     });
+  }
+
+
+  obtenerDiasRestantes(fechaLimite: string | Date): number {
+    if (!fechaLimite) return 0;
+    const hoy = new Date();
+    const limite = new Date(fechaLimite);
+    
+    hoy.setHours(0, 0, 0, 0);
+    limite.setHours(0, 0, 0, 0);
+    
+    const diferenciaMilisegundos = limite.getTime() - hoy.getTime();
+    return Math.ceil(diferenciaMilisegundos / (1000 * 60 * 60 * 24));
+  }
+
+  textoPlazo(fechaLimite: string | Date): string {
+    const dias = this.obtenerDiasRestantes(fechaLimite);
+    if (dias < 0) {
+      return `⚠️ Retrasado por ${Math.abs(dias)} días`;
+    } else if (dias === 0) {
+      return '🟡 Vence hoy';
+    } else {
+      return `🟢 ${dias} días restantes`;
+    }
   }
 }

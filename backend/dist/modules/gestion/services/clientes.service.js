@@ -27,7 +27,8 @@ let ClientesService = class ClientesService {
         if (existe) {
             throw new common_1.ConflictException(`El cliente '${dto.nombre}' ya está registrado.`);
         }
-        const cliente = this.clienteRepo.create({ nombre: dto.nombre, estado: estados_clientes_enum_1.EstadosClientesEnum.ACTIVO });
+        const cliente = this.clienteRepo.create({ nombre: dto.nombre, correo: dto.correo,
+            telefono: dto.telefono, estado: estados_clientes_enum_1.EstadosClientesEnum.ACTIVO });
         const guardado = await this.clienteRepo.save(cliente);
         return { id: guardado.id };
     }
@@ -53,6 +54,10 @@ let ClientesService = class ClientesService {
             cliente.nombre = dto.nombre;
         if (dto.estado)
             cliente.estado = dto.estado;
+        if (dto.correo !== undefined)
+            cliente.correo = dto.correo;
+        if (dto.telefono !== undefined)
+            cliente.telefono = dto.telefono;
         try {
             await this.clienteRepo.save(cliente);
         }

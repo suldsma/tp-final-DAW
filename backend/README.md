@@ -1,6 +1,26 @@
-## Backend - Sistema de Gestión de Proyectos
+### Backend - Sistema de Gestión de Proyectos
 
 Este es el backend del Sistema de Gestión de Proyectos, desarrollado con NestJS, TypeScript y TypeORM. Provee la API REST necesaria para la gestión de clientes, proyectos, tareas y estadísticas.
+
+---
+
+## 🔑 Credenciales de Acceso de Prueba
+
+Para ingresar al sistema desde la pantalla de Login, utilice los siguientes datos:
+
+- **Usuario:** usuario
+- **Contraseña:** clave
+
+---
+
+## 🛠️ Instrucciones para Configurar la Base de Datos
+
+Para levantar la base de datos de forma local, siga estos pasos:
+
+1. Abra **pgAdmin 4** y cree una base de datos vacía llamada `gestion_proyectos`.
+2. Haga clic derecho sobre la base de datos creada y seleccione **Query Tool**.
+3. Copie todo el contenido del archivo `entrega_final_bd.sql` (ubicado en la raíz de este proyecto) y péguelo en la consola de pgAdmin.
+4. Presione **F5** (o el botón Ejecutar). Esto creará la estructura completa del sistema y cargará de forma automática el usuario administrador de prueba.
 
 ---
 
@@ -15,16 +35,6 @@ Base de Datos: (Ej: PostgreSQL/MySQL)
 Validación: class-validator, class-transformer
 
 Documentación: Swagger (OpenAPI)
-
----
-
-## 📋 Requisitos Previos
-
-Node.js (v18 o superior)
-
-npm o yarn
-
-Base de datos configurada y corriendo
 
 ---
 

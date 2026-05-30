@@ -24,6 +24,14 @@ __decorate([
     __metadata("design:type", String)
 ], ListClienteDTO.prototype, "nombre", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({ required: false }),
+    __metadata("design:type", String)
+], ListClienteDTO.prototype, "correo", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ required: false }),
+    __metadata("design:type", String)
+], ListClienteDTO.prototype, "telefono", void 0);
+__decorate([
     (0, swagger_1.ApiProperty)(),
     __metadata("design:type", String)
 ], ListClienteDTO.prototype, "estado", void 0);

@@ -19,12 +19,16 @@ const update_tarea_dto_1 = require("../dtos/input/update-tarea.dto");
 const swagger_1 = require("@nestjs/swagger");
 const tareas_service_1 = require("../services/tareas.service");
 const auth_guard_1 = require("../../auth/guards/auth.guard");
+const estados_tareas_enum_1 = require("../enums/estados-tareas.enum");
 let TareasController = class TareasController {
     constructor(tareasService) {
         this.tareasService = tareasService;
     }
     async crearTarea(dto) {
         return await this.tareasService.crearTarea(dto);
+    }
+    async actualizarEstado(id, estado) {
+        return await this.tareasService.actualizarEstado(id, estado);
     }
     async actualizarTarea(id, dto) {
         await this.tareasService.actualizarTarea(id, dto);
@@ -45,6 +49,7 @@ let TareasController = class TareasController {
 exports.TareasController = TareasController;
 __decorate([
     (0, swagger_1.ApiBearerAuth)(),
+    (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -53,6 +58,17 @@ __decorate([
 ], TareasController.prototype, "crearTarea", null);
 __decorate([
     (0, swagger_1.ApiBearerAuth)(),
+    (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
+    (0, common_1.Patch)(":id/estado"),
+    __param(0, (0, common_1.Param)("id", common_1.ParseIntPipe)),
+    __param(1, (0, common_1.Body)("estado")),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, String]),
+    __metadata("design:returntype", Promise)
+], TareasController.prototype, "actualizarEstado", null);
+__decorate([
+    (0, swagger_1.ApiBearerAuth)(),
+    (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
     (0, common_1.Put)(":id"),
     __param(0, (0, common_1.Param)("id", common_1.ParseIntPipe)),
     __param(1, (0, common_1.Body)()),
@@ -62,6 +78,7 @@ __decorate([
 ], TareasController.prototype, "actualizarTarea", null);
 __decorate([
     (0, swagger_1.ApiBearerAuth)(),
+    (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
     (0, common_1.Delete)(":id"),
     __param(0, (0, common_1.Param)("id", common_1.ParseIntPipe)),
     __metadata("design:type", Function),
@@ -70,6 +87,7 @@ __decorate([
 ], TareasController.prototype, "eliminarTarea", null);
 __decorate([
     (0, swagger_1.ApiBearerAuth)(),
+    (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
     (0, common_1.Get)(),
     __param(0, (0, common_1.Query)("idProyecto")),
     __metadata("design:type", Function),
@@ -78,7 +96,6 @@ __decorate([
 ], TareasController.prototype, "obtenerTareas", null);
 exports.TareasController = TareasController = __decorate([
     (0, swagger_1.ApiTags)('Tareas'),
-    (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
     (0, common_1.Controller)('tareas'),
     __metadata("design:paramtypes", [tareas_service_1.TareasService])
 ], TareasController);

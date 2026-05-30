@@ -21,6 +21,7 @@ exports.AppModule = AppModule = __decorate([
         imports: [
             config_1.ConfigModule.forRoot({
                 isGlobal: true,
+                envFilePath: '.env',
             }),
             typeorm_1.TypeOrmModule.forRootAsync({
                 imports: [config_1.ConfigModule],
@@ -34,6 +35,7 @@ exports.AppModule = AppModule = __decorate([
                     database: configService.get('DB_NAME', 'daw_db'),
                     autoLoadEntities: true,
                     synchronize: false,
+                    ssl: configService.get('NODE_ENV') === 'production' ? { rejectUnauthorized: false } : false,
                 }),
             }),
             auth_module_1.AuthModule,

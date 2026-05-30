@@ -9,7 +9,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.EstadisticasModule = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
-const auth_module_1 = require("../auth/auth.module");
 const estadisticas_controller_1 = require("./controllers/estadisticas.controller");
 const estadisticas_service_1 = require("./services/estadisticas.service");
 const proyecto_entity_1 = require("../gestion/entities/proyecto.entity");
@@ -26,7 +25,6 @@ exports.EstadisticasModule = EstadisticasModule = __decorate([
                 cliente_entity_1.ClienteEntity,
                 tarea_entity_1.TareaEntity,
             ]),
-            auth_module_1.AuthModule,
         ],
         controllers: [estadisticas_controller_1.EstadisticasController],
         providers: [estadisticas_service_1.EstadisticasService],

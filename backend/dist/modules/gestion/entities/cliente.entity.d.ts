@@ -3,6 +3,8 @@ import { ProyectoEntity } from './proyecto.entity';
 export declare class ClienteEntity {
     id: number;
     nombre: string;
+    correo?: string;
+    telefono?: string;
     estado: EstadosClientesEnum;
     proyectos: ProyectoEntity[];
 }

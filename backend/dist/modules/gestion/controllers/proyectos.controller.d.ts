@@ -13,6 +13,7 @@ export declare class ProyectosController {
         id: number;
         nombre: string;
         estado: EstadosProyectosEnum;
+        fechaFinalizacion: Date;
         cliente: {
             id: number;
             nombre: string;
